@@ -185,6 +185,8 @@ FRL-SYSTEM/
 
 Click the Colab badge at the top of each notebook. Run them in order (00 → 05). No local setup required.
 
+Each notebook clones the repo and mounts Google Drive on its own, and every notebook's outputs are saved to Drive automatically — so you can run 00 today, close the tab, and open 01 in a brand new runtime tomorrow. See [Cross-Session Reliability](#cross-session-reliability-google-drive-persistence) below.
+
 ### Option 2: Run Locally
 
 ```bash
@@ -229,6 +231,19 @@ git clone https://github.com/cliffordnwanna/FRL-SYSTEM.git
 **Total end-to-end runtime: ~34 minutes on Colab free tier with T4 GPU.**
 
 Enable GPU in Colab: `Runtime → Change runtime type → T4 GPU`
+
+---
+
+## Cross-Session Reliability (Google Drive Persistence)
+
+Colab runtimes are ephemeral — a fresh tab, an idle timeout, or a disconnect mid-training wipes everything on disk. A naive "run all 6 notebooks in order" workflow only survives if you keep one tab open uninterrupted for the full ~34 minutes, which is fragile in practice.
+
+Every notebook in this repo carries two small, self-contained cells that remove that constraint:
+
+1. **Restore cell** (right after the repo clone) — mounts Google Drive at `/content/drive` and copies any artifacts already saved there (`customers.csv`, `customer_embeddings.pkl`, `encoder.pt`, `graph_data.pkl`, etc.) into `data/synthetic/` before the notebook does any work.
+2. **Save cell** (as the last step, before the summary) — copies everything the notebook produced back out to `/content/drive/MyDrive/FRL-SYSTEM-artifacts/`.
+
+The effect: each notebook is independently resumable. Run 00 today, close the laptop, open 03 next week in a completely fresh runtime — it pulls the graph inputs it needs from Drive automatically, no manual file shuffling and no requirement to keep a tab alive across all six stages. The first notebook you run in a session prompts a one-time Google Drive authorization; every notebook after that is hands-off.
 
 ---
 
