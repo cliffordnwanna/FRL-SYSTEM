@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+
+# Data - large files
+data/synthetic/*.csv
+data/synthetic/*.pkl
+data/synthetic/*.parquet
+*.pkl
+*.pt
+*.pth
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# Results (commit selectively)
+docs/results/*.png
+docs/results/*.jpg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Colab credentials
+token.json
+credentials.json
