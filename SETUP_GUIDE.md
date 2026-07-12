@@ -7,7 +7,7 @@
 
 ### 1.1 Create the repo on GitHub
 1. Go to github.com → New repository
-2. Name: `frl-system`
+2. Name: `FRL-SYSTEM`
 3. Description: `Financial Representation Learning System — customer embeddings via CoLES + GraphSAGE`
 4. Visibility: **Public** (important — Colab badge links need public access)
 5. Do NOT initialise with README (you already have one)
@@ -18,13 +18,13 @@ Open your terminal (or VS Code terminal / Claude Code terminal):
 
 ```bash
 # Navigate to the unzipped folder
-cd path/to/frl-system
+cd path/to/FRL-SYSTEM
 
 # Initialise git
 git init
 
-# Add remote (replace YOUR_USERNAME)
-git remote add origin https://github.com/YOUR_USERNAME/frl-system.git
+# Add remote (replace cliffordnwanna)
+git remote add origin https://github.com/cliffordnwanna/FRL-SYSTEM.git
 
 # Stage everything
 git add .
@@ -38,11 +38,11 @@ git push -u origin main
 ```
 
 ### 1.3 Update Colab badge URLs
-In every notebook and README, replace `YOUR_USERNAME` with your actual GitHub username:
+In every notebook and README, replace `cliffordnwanna` with your actual GitHub username:
 
 ```bash
 # Find and replace in all files (Mac/Linux)
-grep -r "YOUR_USERNAME" . --include="*.md" --include="*.ipynb" -l
+grep -r "cliffordnwanna" . --include="*.md" --include="*.ipynb" -l
 # Then open each file and replace
 ```
 
@@ -51,7 +51,7 @@ grep -r "YOUR_USERNAME" . --include="*.md" --include="*.ipynb" -l
 ## Phase 2 — Run on Google Colab (25 minutes)
 
 ### 2.1 Open Notebook 00
-Go to: `github.com/YOUR_USERNAME/frl-system`
+Go to: `github.com/cliffordnwanna/FRL-SYSTEM`
 Click `notebooks/00_synthetic_data_generator.ipynb`
 Click **Open in Colab** badge
 
@@ -61,7 +61,7 @@ Click **Open in Colab** badge
 ### 2.3 Update repo URL in notebook
 In the first code cell, change:
 ```python
-REPO_URL = "https://github.com/YOUR_USERNAME/frl-system.git"
+REPO_URL = "https://github.com/cliffordnwanna/FRL-SYSTEM.git"
 ```
 to your actual username.
 
@@ -82,7 +82,7 @@ drive.mount('/content/drive')
 
 import shutil
 shutil.copy("data/synthetic/customer_embeddings.pkl",
-            "/content/drive/MyDrive/frl-system/customer_embeddings.pkl")
+            "/content/drive/MyDrive/FRL-SYSTEM/customer_embeddings.pkl")
 ```
 
 ---
@@ -127,7 +127,7 @@ Suggested title:
 **"Module not found" error in Colab:**
 ```python
 import sys
-sys.path.insert(0, "/content/frl-system")
+sys.path.insert(0, "/content/FRL-SYSTEM")
 ```
 
 **Out of memory on free Colab:**

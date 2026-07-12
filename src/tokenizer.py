@@ -205,12 +205,14 @@ class FinancialTokenizer:
             "timestamp": "timestamp",
         }
 
-        txn_df = transactions.rename(columns={v: k for k, v in txn_cols.items()
-                                              if v in transactions.columns})
+        txn_df = transactions.rename(columns={k: v for k, v in txn_cols.items()
+                                              if k in transactions.columns})
         txn_df = txn_df.reindex(columns=[
             "event_id", "customer_id", "counterparty_id",
             "amount", "event_type", "channel", "product_code", "timestamp"
         ])
+        # txn_type values are "CREDIT"/"DEBIT"; EVENT_TYPES vocab uses "TXN_CREDIT"/"TXN_DEBIT"
+        txn_df["event_type"] = "TXN_" + txn_df["event_type"].astype(str)
 
         app_df = app_events.reindex(columns=[
             "event_id", "customer_id", "event_type",

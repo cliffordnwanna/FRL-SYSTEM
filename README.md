@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/frl-system/blob/main/notebooks/00_synthetic_data_generator.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/cliffordnwanna/FRL-SYSTEM/blob/main/notebooks/00_synthetic_data_generator.ipynb)
 
 ---
 
@@ -122,7 +122,7 @@ The system learns to place customers into AEPD stages from their embeddings — 
 ## Repository Structure
 
 ```
-frl-system/
+FRL-SYSTEM/
 │
 ├── README.md                          ← You are here
 ├── .gitignore
@@ -189,8 +189,8 @@ Click the Colab badge at the top of each notebook. Run them in order (00 → 05)
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/YOUR_USERNAME/frl-system.git
-cd frl-system
+git clone https://github.com/cliffordnwanna/FRL-SYSTEM.git
+cd FRL-SYSTEM
 
 # 2. Create a virtual environment
 python -m venv venv
@@ -209,7 +209,7 @@ jupyter notebook notebooks/
 ### Option 3: Run with Claude Code (VS Code)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/frl-system.git
+git clone https://github.com/cliffordnwanna/FRL-SYSTEM.git
 # Open in VS Code → Claude Code handles dependencies and execution
 ```
 
