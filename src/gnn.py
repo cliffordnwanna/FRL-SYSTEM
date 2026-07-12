@@ -30,6 +30,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch_geometric.nn import SAGEConv
 from pathlib import Path
 from tqdm import tqdm
 
@@ -49,12 +50,11 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # ─────────────────────────────────────────────
 
 class GraphSAGELayer(nn.Module):
-    """Single GraphSAGE layer — mean aggregation."""
+    """Single GraphSAGE layer — mean aggregation, via PyTorch Geometric's SAGEConv."""
 
     def __init__(self, in_dim: int, out_dim: int):
         super().__init__()
-        # Concat self + neighbour mean → project
-        self.linear = nn.Linear(in_dim * 2, out_dim)
+        self.conv = SAGEConv(in_dim, out_dim, aggr="mean")
         self.norm = nn.LayerNorm(out_dim)
 
     def forward(self, x: torch.Tensor, edge_index: torch.Tensor) -> torch.Tensor:
@@ -65,21 +65,7 @@ class GraphSAGELayer(nn.Module):
         Returns:
             out:         [N, out_dim]
         """
-        N = x.shape[0]
-        src, dst = edge_index[0], edge_index[1]
-
-        # Mean aggregation of neighbour features
-        agg = torch.zeros_like(x)
-        count = torch.zeros(N, 1, device=x.device)
-
-        agg.scatter_add_(0, dst.unsqueeze(1).expand(-1, x.shape[1]), x[src])
-        count.scatter_add_(0, dst.unsqueeze(1), torch.ones(len(dst), 1, device=x.device))
-        count = count.clamp(min=1)
-        agg = agg / count
-
-        # Concat self + aggregated neighbours
-        concat = torch.cat([x, agg], dim=-1)
-        out = self.norm(F.relu(self.linear(concat)))
+        out = self.norm(F.relu(self.conv(x, edge_index)))
         return F.normalize(out, p=2, dim=-1)
 
 
